@@ -51,34 +51,41 @@ public class SubsetSum {
 	 *     SS(S,i) ->   {
 	 *     					False    if i >= a.length || S < 0
 	 * 						True     if  S=0
-	 * 						SS(S, i+1) || SS(S-a[i], i+1)
-	 * 
+	 * 						SS(S, i+1) || SS(S-a[i], i+1) 
 	 * 					}
 	 * 
 	 * 
 	 *  You may now draw a table to verify if this works
 	 */						
 	public static boolean dynamicProgramming(int findSum, int[] set) {
+		// use Boolean to ensure NPE is thrown if something is not initialized.
 		Boolean[][] ssmemo = new Boolean [findSum+1][set.length];
 		if(findSum < 0) {
 			return false;
 		}
+		// sum 0..S
 		for(int sum = 0; sum <= findSum; sum++ ) {
+			// numbers n-1,0
 			for(int index = set.length-1; index >= 0; index--) {
+				// calc remainder
 				int rem = sum - set[index];
 				if(rem == 0) {
+					// edge condition - if 0.. we have a solution
 					ssmemo[sum][index] = true;
 					continue;
 				}
 				if(index+1 >= set.length) {
+					// edge condition - if [i + 1] > set.length.. both SS(S, i+1) and SS(S-a[i], i+1) are false
 					ssmemo[sum][index] = false;
 					continue;
 				}
 				if(rem < 0) {
+					// edge condition - if remainder < 0 ... we dont have a solution
 					ssmemo[sum][index] = ssmemo[sum][index+1];
 					continue;
 				} 
 				
+				// no edge conditions... calculate using DP
 				ssmemo[sum][index] = ssmemo[sum][index+1] || ssmemo[rem][index+1];
 			}
 		}
