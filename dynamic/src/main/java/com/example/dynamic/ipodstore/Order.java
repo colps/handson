@@ -74,39 +74,116 @@ public class Order {
 			return -1;
 		}
 		// we start with 0 suffix cost
-		int prevMinSuffixCost = 0;
+		int prevMinTotalLotPrice = 0;
 		for(int rem = lots -1 ; rem >= 0; rem--) {
 			// keep track of the cur min suffix cost for the next suffix
-			int currMinSuffixCost = -1, currMinStoreindex = -1;
+			int currMinTotalLotPrice = -1, minStoreindex = -1;
 			for(int s= costMatrix.length-1; s >= 0; s--) {
 				if(manager.isStoreStockEmpty(s)) {
 					costMatrix[s][rem] = -1;
 					continue;
 				}
-				int itemPrice = 0;
+				int lotPrice = 0;
 				if(placedAt.equals(manager.getStore(s))) {
-					itemPrice = manager.getLocalPrice(s);
+					lotPrice = manager.getLocalPrice(s);
 				} else {
-					itemPrice = manager.getExportPrice(s);
+					lotPrice = manager.getExportPrice(s);
 				}
-				int suffixCost = prevMinSuffixCost + itemPrice;
-				if(currMinSuffixCost < 0 || currMinSuffixCost > suffixCost) {
-					currMinStoreindex = s;
-					currMinSuffixCost = suffixCost;
+				int currTotalLotPrice = prevMinTotalLotPrice + lotPrice;
+				if(currMinTotalLotPrice < 0 || currMinTotalLotPrice > currTotalLotPrice) {
+					minStoreindex = s;
+					currMinTotalLotPrice = currTotalLotPrice;
 				}
-				costMatrix[s][rem] = suffixCost;
+				costMatrix[s][rem] = currTotalLotPrice;
 			}
-			manager.decrementStock(currMinStoreindex);
-			prevMinSuffixCost = currMinSuffixCost;
+			manager.decrementStock(minStoreindex);
+			prevMinTotalLotPrice = currMinTotalLotPrice;
 		}
-		return prevMinSuffixCost;
+		return prevMinTotalLotPrice;
+	}
+	
+	/**
+	 * Sub problems -
+	 *  We look at *suffixes of lots* DP[l:]. The Suffix of lots here represents the remaining lots.
+	 * 
+	 * Guess - We (guess) look at all stores to find the minimum value
+	 * 
+	 * # number of subproblems = LS
+	 * # time/subproblem = O(1)
+	 * # Time complexity = O(LS)
+	 * 
+	 * Recurrence - DP of suffixes -> DP[i:] -> DP of remaining lots
+	 * 
+	 * Given stores S, and lots L
+	 * DP[l,s] = min { DP[l+1] } for all S + Cost(1,s)  
+	 * DP of remaining lot 3 equals, DP of remaining lots 4 and cost of buying 1 lot from store s
+	 *  
+	 * Topological order - 
+	 *  for remaining lots from l-1 to 0  
+	 *     for stores from S to 0
+	 * 
+	 * Given cost table -
+	 *  		A     B    <- buying at
+	 * 		A   50    140
+	 * 		B   90    100
+	 *    order
+	 *      at
+	 * 		
+	 *     Given L lots that are ordered, assume cost of lot L+1 = 0 since this lot will never be bought
+	 * 
+	 * 				0		1 		 2    ( <- lots remaining)
+	 * 		A	   270		180		 90
+	 * 		B      290      190      100  (DP[1,B] = min { DP[2] } for all S + Cost(1,B) ) -> 90 + 100
+	 * 		^
+	 * 		|
+	 * 	  stores
+	 * 
+	 * 
+	 * @return
+	 */
+	public int bottumUpSuffix1() {
+		if(!manager.canFulfillOrder(quantity)) {
+			return -1;
+		}
+		// we start with 0 suffix cost
+		int totalMinLotPrice = 0;
+		for(int rem = lots -1 ; rem >= 0; rem--) {
+			// keep track of the cur min suffix cost for the next suffix
+			int minLotPrice = -1, minStoreIndex = -1;
+			for(int s= costMatrix.length-1; s >= 0; s--) {
+				if(manager.isStoreStockEmpty(s)) {
+					costMatrix[s][rem] = -1;
+					continue;
+				}
+				int lotPrice = 0;
+				if(placedAt.equals(manager.getStore(s))) {
+					lotPrice = manager.getLocalPrice(s);
+				} else {
+					lotPrice = manager.getExportPrice(s);
+				}
+				
+				costMatrix[s][rem] = totalMinLotPrice + lotPrice; 
+				
+				if(minLotPrice < 0 || minLotPrice > lotPrice) {
+					minLotPrice = lotPrice;
+					minStoreIndex = s;
+				}
+			}
+			manager.decrementStock(minStoreIndex);
+			totalMinLotPrice = totalMinLotPrice + minLotPrice;
+		}
+		return totalMinLotPrice;
 	}
 	
 	public static void main(String[] args) {
 		StoreManager manager = new StoreManager();
 		
-		Order o1 = new Order(manager, manager.getStore(0), 110);
+		Order o1 = new Order(manager, manager.getStore(1), 120);
 		System.out.println(o1.bottumUpSuffix());
+		
+		manager = new StoreManager();
+		o1 = new Order(manager, manager.getStore(1), 120);
+		System.out.println(o1.bottumUpSuffix1());
 	}
 	
 }
