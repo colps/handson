@@ -30,10 +30,6 @@ public class Schedule {
 			this.ratio = ratio;
 		}
 		
-		public int getRatio() {
-			return ratio;
-		}
-		
 		public int convert(int value, TimeUnit convertTo) {
 			if(this == convertTo) {
 				return value;
