@@ -12,6 +12,21 @@ public class SubsetSum {
 	
 	/**
 	 * 	I) Try to solve recursively
+	 * 		a) For a general case, consider an element a[i] belongs to a, and given sum S
+	 * 			a[i] will be included in the sum OR
+	 * 			a[i] will not be included in the sum
+	 * 		b) So subset sum (SS) of (a, i, sum) will be given by
+	 * 			SS of (a, i+1, sum - a[i])  => (a[i] is included) OR
+	 * 			SS of (a, i+1, sum) => (a[i] is not included)
+	 * 	    c) Adding the base case,
+	 * 	    	if sum  < 0 OR i = a.length
+	 * 	    		return false
+	 * 	    	else if sum == 0
+	 * 	    		return true
+	 * 	    	else
+	 * 	    		SS(a, i+1, sum - a[i]) || SS(a, i+1, sum)
+	 *
+	 *
 	 */
 	public boolean recursive(int i, int S, int[] set) {
 		if(i >= set.length || S < 0) {
@@ -38,7 +53,7 @@ public class SubsetSum {
 	 * IV) A 2 dimensional array of i,S should help in memoizing the suoltions
 	 * 
 	 * V) Identify dependencies between subproblems. Except for the base cases, every
-	 *	  recursive subproblem depends on other subproblems—which ones? Draw a picture of
+	 *	  recursive subproblem depends on other subproblemsï¿½which ones? Draw a picture of
 	 *	  your data structure, pick a generic element, and draw arrows from each of the other
 	 *	  elements it depends on, In this case this will be tree
 	 * 
