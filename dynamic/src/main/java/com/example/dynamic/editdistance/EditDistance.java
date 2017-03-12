@@ -115,8 +115,8 @@ public class EditDistance {
     public static void main(String[] args) {
         String source = "ALTRUISTIC";
         String target = "ALGORITHM";
-        System.out.println("recursive" + recursive(source.toCharArray(), target.toCharArray(), source.length()-1, target.length()-1));
-        System.out.println("DP" + dynamic(source.toCharArray(), target.toCharArray()));
+        System.out.println("recursive: " + recursive(source.toCharArray(), target.toCharArray(), source.length()-1, target.length()-1));
+        System.out.println("DP: " + dynamic(source.toCharArray(), target.toCharArray()));
 
     }
 }
