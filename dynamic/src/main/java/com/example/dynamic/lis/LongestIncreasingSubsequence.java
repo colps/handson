@@ -65,7 +65,7 @@ public class LongestIncreasingSubsequence {
           return 0;
         } else {
             // the line below is present in both situations in the previous implementation.
-            // So we move it outside
+            // `So we move it outside
             int max = improvedRecursive(a, s+1, e, a[s]);
             if(a[s] > prev){
                 int l = 1 + improvedRecursive(a, s+1, e, a[s]);
@@ -79,7 +79,7 @@ public class LongestIncreasingSubsequence {
     }
 
     /**
-     * II) Subproblems - For each suffix of a[i], is a[i+1] part of longest subsequence
+     * II) Subproblems - For each suffix of Is a[i], is a[i+1] part of longest subsequence
      * For DP ,
      * # Number of subproblems = n*n
      * # Time/subproblem = O(1)
