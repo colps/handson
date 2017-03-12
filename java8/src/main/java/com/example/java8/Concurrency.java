@@ -15,7 +15,7 @@ public class Concurrency {
 
 	AtomicLong largest = new AtomicLong();
 	
-	//largest.set(Math.max(largest.get(), observed)); // Error—race condition!
+	//largest.set(Math.max(largest.get(), observed)); // Errorï¿½race condition!
 	// Instead use compare and set
 	public void compareAndSet(long observed) {
 		long current, newValue;
@@ -56,7 +56,7 @@ public class Concurrency {
 	}
 	
 	
-	// You first call tryOptimisticRead, upon 	which you get a “stamp.” Read your 
+	// You first call tryOptimisticRead, upon 	which you get a ï¿½stamp.ï¿½ Read your 
 	// values and check whether the stamp is still valid (i.e., no other thread 
 	// has obtained a write lock). If so, you can use the values. If not, get a read 
 	// lock (which blocks any writers).
@@ -147,20 +147,23 @@ public class Concurrency {
 		words = map.keySet(1L);
 		words.add("Java");
 	}
-	
+
+
 	/**
-	 * Future.get is a blocking call. Theres no way to tell “When the result becomes 
-	 * available, here is how to process it.” This is the crucial feature that the new 
+	 * Future.get is a blocking call. Theres no way to tell "When the result becomes
+	 * available, here is how to process it." This is the crucial feature that the new
 	 * CompletableFuture<T> class provides.
+	 *
+	 * http://www.nurkiewicz.com/2013/05/java-8-definitive-guide-to.html
 	 */
 	public void completeableFutures() {
 		CompletableFuture<String> contents = null; //readPage("");
 		CompletableFuture<List<String>> links = contents.thenApply(this::getLinks); 
-		// The thenApply method doesn’t block either. It returns another future. When the
+		// The thenApply method doesn't block either. It returns another future. When the
 		// first future has completed, its result is fed to the getLinks method, and the return
 		// value of that method becomes the final result.
 		
-		// creating a CompleteableFuture
+		// creating a CompletableFuture
 		contents = CompletableFuture.supplyAsync(() -> blockingReadPage(""));
 		
 		//Next, you can call thenApply or thenApplyAsync to run another action, either in the
@@ -170,7 +173,7 @@ public class Concurrency {
 			.thenApply(this::getLinks);
 		
 		// Once you are done, you need to save the results, The thenAccept method takes a 
-		// Consumer—that is, a function with return type void. Ideally, you would never call 
+		// Consumer that is, a function with return type void. Ideally, you would never call
 		// get on a future. The last step in the pipeline simply deposits the result where it belongs.
 		CompletableFuture<Void> voidLinks = CompletableFuture.supplyAsync(() -> blockingReadPage(""))
 				.thenApply(this::getLinks).thenAccept(System.out::println);
@@ -184,6 +187,8 @@ public class Concurrency {
 			.thenAccept(System.out::println);
 		
 	}
+
+
 	
 	
 	public String blockingReadPage(String url) {
@@ -202,4 +207,7 @@ public class Concurrency {
 	public CompletableFuture<URL> getURLInput(String prompt) {
 		return null;
 	}
+
+
+
 }

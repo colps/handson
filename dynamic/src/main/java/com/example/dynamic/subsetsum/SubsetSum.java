@@ -53,7 +53,7 @@ public class SubsetSum {
 	 * IV) A 2 dimensional array of i,S should help in memoizing the suoltions
 	 * 
 	 * V) Identify dependencies between subproblems. Except for the base cases, every
-	 *	  recursive subproblem depends on other subproblems�which ones? Draw a picture of
+	 *	  recursive subproblem depends on other subproblems which ones? Draw a picture of
 	 *	  your data structure, pick a generic element, and draw arrows from each of the other
 	 *	  elements it depends on, In this case this will be tree
 	 * 
