@@ -56,7 +56,7 @@ public class Knapsack {
      *
      * VII) We consider suffixes of items so For each suffix i in items list[1..n]
      * sack(n,S) = {
-     *                  0               if n = items.length OR S = 0
+     *                  0               if  S = 0
      *                  sack(n+1, S)    if  S < weight[n]
      *                  max {
      *                      sack(n+1, S),       // item n is not selected
@@ -68,8 +68,8 @@ public class Knapsack {
     public static int dynamic (int[] value, int[] weight, int capacity) {
         int sackMemo[][] = new int[value.length+1][capacity+1];
         for(int n = value.length-1; n >= 0; n-- ){
-            for(int s = 0; s < capacity; s++){
-                if(s == 0 || n == value.length){
+            for(int s = 0; s <= capacity; s++){
+                if(s == 0){
                     sackMemo[n][s] = 0;
                     continue;
                 }
@@ -83,7 +83,7 @@ public class Knapsack {
                 }
             }
         }
-        return sackMemo[0][capacity];
+        return sackMemo[0][50];
     }
 
     public static void main(String[] args) {
