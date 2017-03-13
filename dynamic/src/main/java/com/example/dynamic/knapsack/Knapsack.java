@@ -1,4 +1,4 @@
-package com.lisexample.dynamic.knapsack;
+package com.example.dynamic.knapsack;
 
 
 public class Knapsack {
