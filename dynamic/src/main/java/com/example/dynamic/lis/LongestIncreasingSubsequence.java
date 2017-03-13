@@ -79,22 +79,27 @@ public class LongestIncreasingSubsequence {
     }
 
     /**
-     * II) Subproblems - For each suffix of Is a[i], is a[i+1] part of longest subsequence
+     * II) Define subproblems & analyse running time  -
+     * For each suffix of Is a[i], is a[i+1] part of longest subsequence
      * For DP ,
      * # Number of subproblems = n*n
      * # Time/subproblem = O(1)
      * # Complexity = O(n^2)
      *
-     * III) Guess for all situations, if i+1 is part of LIS or not part of it
+     * III)  Define what will be guess part
+     * Guess for all situations, if i+1 is part of LIS or not part of it
      *
-     * IV) A 2 dimensional array n *n for start and end index will help memoize
+     * IV)  Define structure for memoization
+     * A 2 dimensional array n *n for start and end index will help memoize
      *
-     * V) Dependencies between sub problems. Except for the base cases, every
+     * V) Create the dependency graph
+     *    Dependencies between sub problems. Except for the base cases, every
      *	  recursive subproblem depends on other subproblems which ones? Draw a picture of
      *	  your data structure, pick a generic element, and draw arrows from each of the other
      *	  elements it depends on, In this case this will be tree
      *
-     * VI) Topological order. Here, to compute (i,j) we need to compute (i, j+1) (suffix) ,
+     * VI)  Find the Topological order to solve the problem
+     * Topological order. Here, to compute (i,j) we need to compute (i, j+1) (suffix) ,
      *      So order will be
      *     for i in range(n-1:0)
      *       for j in range(n-1:0)

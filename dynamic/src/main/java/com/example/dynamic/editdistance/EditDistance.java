@@ -49,22 +49,27 @@ public class EditDistance {
 
 
     /**
-     * II) We look at prefixes of the source[i] and target[j] strings, which operation gives the minimum distance
+     * II) Define subproblems & analyse running time -
+     * We look at prefixes of the source[i] and target[j] strings, which operation gives the minimum distance
      * For DP ,
      * # Number of subproblems = m*n
      * # Time/subproblem = O(1)
      * # Complexity = O(m*n)
      *
-     * III) We calculate value for all operations and select the least value
+     * III) Define what will be guess part
+     * We calculate value for all operations and select the least value
      *
-     * IV) A 2 dimensional array n *n for start and end index will help memoize
+     * IV) Define structure for memoization
+     * A 2 dimensional array n *n for start and end index will help memoize
      *
-     * V) Dependencies between sub problems. Except for the base cases, every
+     * V) Create the dependency graph
+     * Dependencies between sub problems. Except for the base cases, every
      *	  recursive subproblem depends on other subproblems which ones? Draw a picture of
      *	  your data structure, pick a generic element, and draw arrows from each of the other
      *	  elements it depends on, In this case this will be tree
      *
-     * VI) Topological order. Here, to compute (i,j) we need to compute (i, j+1) (suffix) ,
+     * VI)  Find the Topological order to solve the problem
+     * Topological order. Here, to compute (i,j) we need to compute (i, j+1) (suffix) ,
      *      So order will be
      *     for i in range(0:m)
      *       for j in range(0:n)

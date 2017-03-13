@@ -34,22 +34,27 @@ public class Knapsack {
     }
 
     /**
-     * II) We look at suffixes of items. For item n and capacity S we have to find,  if we should select item n
+     * II) Define subproblems & analyse running time -
+     * We look at suffixes of items. For item n and capacity S we have to find,  if we should select item n
      * so as to maximize value
      * # Number of subproblems = n * S
      * # Time/subproblem = O(1)
      * # Complexity = O(nS) (pseudo polynomial time)
      *
-     * III) We calculate the max value for all conditions
+     * III) Define what will be guess part
+     * We calculate the max value for all conditions
      *
-     * IV) A 2 dimensional array n*S for start and end index will help memoize
+     * IV) Define structure for memoization
+     * A 2 dimensional array n*S for start and end index will help memoize
      *
-     * V) Dependencies between sub problems. Except for the base cases, every
+     * V) Create the dependency graph
+     *    Dependencies between sub problems. Except for the base cases, every
      *	  recursive subproblem depends on other subproblems which ones? Draw a picture of
      *	  your data structure, pick a generic element, and draw arrows from each of the other
      *	  elements it depends on, In this case this will be tree
      *
-     * VI) Topological order. From the recurrence above sack(n,S) depends on sack(n+1, S) or sack(n+1, S-w[n])
+     * VI)  Find the Topological order to solve the problem
+     * Topological order. From the recurrence above sack(n,S) depends on sack(n+1, S) or sack(n+1, S-w[n])
      * So topological order will be
      * for n in range(n..1)
      *      for S in range(S..0)
