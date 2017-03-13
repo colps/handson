@@ -32,7 +32,7 @@ public class EditDistance {
         if(j == 0){
             return i;
         }
-        if(source[i] == target[j]){
+        if(source[i-1] == target[j-1]){
             return recursive(source, target, i-1, j-1);
         } else {
             int min = Math.min(
@@ -115,7 +115,7 @@ public class EditDistance {
     public static void main(String[] args) {
         String source = "ALTRUISTIC";
         String target = "ALGORITHM";
-        System.out.println("recursive: " + recursive(source.toCharArray(), target.toCharArray(), source.length()-1, target.length()-1));
+        System.out.println("recursive: " + recursive(source.toCharArray(), target.toCharArray(), source.length(), target.length()));
         System.out.println("DP: " + dynamic(source.toCharArray(), target.toCharArray()));
 
     }
