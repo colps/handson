@@ -4,12 +4,12 @@ The repository has 2 modules dynamic, java8
 ### java8 
 This module contains examples on new concepts in java8
 
+### misc
+This module contains some misc problems. LRU cache
+
 ### dynamic 
 This module contains popular examples on Dynamic programming. I am using the principles suggested by Jeff Erickson for solving these
 problems. I am providing his explanation below. The module is an effort to try and solve DP problems by applying these principles
-
-### misc
-This module contains some misc problems. LRU cache
 
 1. In a nutshell, dynamic programming is recursion without repetition. Dynamic programming 
 algorithms store the solutions of intermediate subproblems, often but not always in some kind of
