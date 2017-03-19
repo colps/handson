@@ -50,7 +50,7 @@ public class CoinChangeTotal {
      * To calculate change(S, n) we need to know S-denomination[i] and i -1, So we look
      * at prefixes
      * for n in range (1..n)
-     *      for s in range (1..S)
+     *      for s in range (0..S)
      *
      * VII) Solution
      * change(n, S) = {
