@@ -54,38 +54,33 @@ public class CoinChange {
      *
      * VII) Solution
      * change(n, S) = {
-     *                  1          if S = 0
-     *                  0          if n < 0 and S > 0
+     *                  1          if S = 0 or n == 0
+     *                  change(n-1, S)          if S - value[n] < 0
      *                  change(n-1, S) + change(n, S - denomination[n])     // otherwise
      *              }
      */
     public static int dynamic(int amount, int[]denomination) {
-        int [][] changeMemo = new int[denomination.length+1][amount+1];
+        int [][] changeMemo = new int[denomination.length][amount+1];
         for(int n = 0; n <= denomination.length - 1; n++){
             for(int s = 0; s <= amount; s++ ){
-                if(s-denomination[n] == 0){
+                if(s == 0 || n == 0){
                     changeMemo[n][s] = 1;
                     continue;
                 }
-                if(s-denomination[n] < 0){
-                    changeMemo[n][s] = 0;
-                    continue;
+                if(s - denomination[n] < 0) {
+                    changeMemo[n][s] = changeMemo[n-1][s];
+                } else {
+                    changeMemo[n][s] = changeMemo[n-1][s] + changeMemo[n][s - denomination[n]];
                 }
-                if(n == 0 && s-denomination[n] > 0){
-                    changeMemo[n][s] = 0;
-                    continue;
-                }
-                changeMemo[n][s] = changeMemo[n-1][s] + changeMemo[n][s-denomination[n]];
-
             }
         }
-        return changeMemo[denomination.length][amount];
+        return changeMemo[denomination.length - 1][amount];
     }
     
     public static void main(String[] args) {
-        int a[] = {1, 2, 3};
-        System.out.println("recursive: " + recursive(4, a.length -1, a));
-        System.out.println("dynamic: " + dynamic(4, a));
+        int a[] = {1, 2, 3, 6};
+        System.out.println("recursive: " + recursive(10, a.length -1, a));
+        System.out.println("dynamic: " + dynamic(10, a));
     }
 
 }
