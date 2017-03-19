@@ -1,6 +1,6 @@
 package com.example.dynamic.coin;
 
-public class CoinChange {
+public class CoinChangeTotal {
 
     /**
      * change(S, 1..n) where S is the amount to be changed and i is the current
