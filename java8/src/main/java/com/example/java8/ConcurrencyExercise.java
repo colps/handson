@@ -344,7 +344,7 @@ public class ConcurrencyExercise {
             try {
                 Object previous = this.object;
 
-                this.object = this.exchanger.exchange(this.object);
+                this.object = exchanger.exchange(this.object);
 
                 System.out.println(
                         Thread.currentThread().getName() +

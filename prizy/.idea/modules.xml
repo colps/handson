@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/prizy.iml" filepath="$PROJECT_DIR$/prizy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/prizy-core/prizy-core.iml" filepath="$PROJECT_DIR$/prizy-core/prizy-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/prizy-db/prizy-db.iml" filepath="$PROJECT_DIR$/prizy-db/prizy-db.iml" />
+      <module fileurl="file://$PROJECT_DIR$/prizy-model/prizy-model.iml" filepath="$PROJECT_DIR$/prizy-model/prizy-model.iml" />
+      <module fileurl="file://$PROJECT_DIR$/prizy-root-pom/prizy-root-pom.iml" filepath="$PROJECT_DIR$/prizy-root-pom/prizy-root-pom.iml" />
+      <module fileurl="file://$PROJECT_DIR$/prizy-server/prizy-server.iml" filepath="$PROJECT_DIR$/prizy-server/prizy-server.iml" />
+    </modules>
+  </component>
+</project>

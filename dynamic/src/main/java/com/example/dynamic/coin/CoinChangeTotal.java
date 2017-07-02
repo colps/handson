@@ -3,6 +3,10 @@ package com.example.dynamic.coin;
 public class CoinChangeTotal {
 
     /**
+     *
+     * Given a value N, if we want to make change for N cents, and we have infinite supply of each of
+     * S = { S1, S2, .. , Sm} valued coins, how many ways can we make the change?
+     *
      * change(S, 1..n) where S is the amount to be changed and i is the current
      * denomination
      *

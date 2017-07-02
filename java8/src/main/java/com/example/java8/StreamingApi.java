@@ -232,7 +232,8 @@ public class StreamingApi {
 		// use partitioning when there are fewer values
 		Map<Boolean, List<Locale>> englishAndOtherLocales = locales.stream().collect(
 				Collectors.partitioningBy(l -> l.getLanguage().equals("en")));
-		
+
+
 	}
 	
 	public void primitiveStreams() {
@@ -244,7 +245,8 @@ public class StreamingApi {
 		// primitive to boxed stream
 		Stream<Integer> integers = IntStream.range(0, 100).boxed();
 	}
-	
+
+
 	
 
 }

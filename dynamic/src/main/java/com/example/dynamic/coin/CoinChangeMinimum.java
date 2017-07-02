@@ -90,7 +90,7 @@ public class CoinChangeMinimum {
                 }
                 int res = changeMemo[n][s - coins[n-1]];
                 if(res != Integer.MAX_VALUE){
-                    res = 1 + changeMemo[n][s - coins[n-1]];
+                    res ++;
                 }
                 changeMemo[n][s] =  Math.min(res, changeMemo[n-1][s]);
             }

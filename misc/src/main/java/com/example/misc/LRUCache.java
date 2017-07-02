@@ -24,8 +24,8 @@ public class LRUCache<K, V> {
 
 
         private Node(K key, V value) {
-            this.next = next;
-            this.prev = prev;
+            this.next = null;
+            this.prev = null;
             this.key = key;
             this.value = value;
         }

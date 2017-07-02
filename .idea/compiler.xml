@@ -15,8 +15,8 @@
     <bytecodeTargetLevel target="1.8">
       <module name="dynamic" target="1.8" />
       <module name="handson" target="1.8" />
-      <module name="java8" target="1.8" />
-      <module name="misc" target="1.8" />
+      <module name="java8" target="1.5" />
+      <module name="misc" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
